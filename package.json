@@ -1,0 +1,30 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Celltek node.js blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "edge.js": "^1.1.4",
+    "express": "^4.17.1",
+    "express-edge": "^2.0.2",
+    "express-fileupload": "^1.2.0",
+    "express-session": "^1.17.1",
+    "middleware": "^1.0.0",
+    "mongoose": "^5.10.4",
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7",
+    "startbootstrap-clean-blog": "^5.0.9"
+  }
+}
