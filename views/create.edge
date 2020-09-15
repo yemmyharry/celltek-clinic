@@ -1,4 +1,4 @@
-@layout('layouts.app')
+@layout('layouts.meow')
  
 @section('content')
 
@@ -16,6 +16,7 @@
     </div>
   </div>
 </header>
+
  
 <div class="container">
   <div class="row">
@@ -36,25 +37,28 @@
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
             <label>Description</label>
-            <input type="text" name="description" placeholder="Description" class="form-control">
+            <input type="text" name="description" placeholder="Description" class="form-control" required>
           </div>
         </div>
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
             <label>Content</label>
-            <textarea name="content" placeholder="Content ..." cols="30" rows="10" class="form-control"></textarea>
+            <input name="content" placeholder="Content ..." class="form-control" required>
+            </input>
           </div>
         </div>
         <div class="form-group mt-3">
           <input type="file" name="image" class="form-control-file">
         </div>
         <div class="form-group my-4 text-center">
-          <button class="btn btn-primary">Create Post</button>
+          <button class="btn btn-primary">Create Post</button> 
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
 
 
 @endsection
