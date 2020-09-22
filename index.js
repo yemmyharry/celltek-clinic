@@ -7,6 +7,7 @@ const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
 const connectFlash = require("connect-flash");
 const edge = require("edge.js");
+const methodOverride = require("method-override");
 
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
 const storePost = require('./middleware/storePost');
@@ -21,10 +22,13 @@ const createUserController = require("./controllers/createUser");
 const storeUserController = require('./controllers/storeUser');
 const loginController = require("./controllers/login");
 const loginUserController = require('./controllers/loginUser');
- 
+const getEditPostController = require('./controllers/getEditPost')
+const putEditPostController = require('./controllers/putEditPost')
+const Post = require('./database/models/Post')
+
 const app = new express();
  
-mongoose.connect('mongodb://localhost:27017/node-blog', { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://moosemuffin:immortal@yemmyharry-vgumn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
     .then(() => 'You are now connected to Mongo!')
     .catch(err => console.error('Something went wrong', err));
  
@@ -36,7 +40,8 @@ app.use(expressSession({
         mongooseConnection: mongoose.connection
     })
 }));
- 
+
+app.use(methodOverride("_method"))
 app.use(connectFlash());
 app.use(fileUpload());
 app.use(express.static("public"));
@@ -50,12 +55,14 @@ app.use('*', (req, res, next) => {
  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
  
+  
 app.use('/posts/store', storePost)
  
 app.get("/", homePageController);
 app.get("/post/:id", getPostController);
+app.get("/edit/:id", getEditPostController);
+app.put("/post/:id", putEditPostController);
 app.get("/posts/new", auth, createPostController);
 app.post("/posts/store", auth, storePost, storePostController);
 app.get("/auth/login", redirectIfAuthenticated, loginController);
@@ -63,7 +70,12 @@ app.post("/users/login", redirectIfAuthenticated, loginUserController);
 app.get("/auth/register", redirectIfAuthenticated, createUserController);
 app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", redirectIfAuthenticated, logoutController);
- 
+app.delete('/post/:id', async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id)
+  res.redirect('/')
+})
+
+
 app.listen(4000, () => {
   console.log("App listening on port 4000");
-});
+});                         

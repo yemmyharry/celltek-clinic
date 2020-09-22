@@ -1,8 +1,12 @@
 const Post = require('../database/models/Post')
  
-module.exports = async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    res.render("post", {
-        post
+module.exports = (req, res) => {
+    
+    const post = Post.findById(req.params.id)
+        .then((result) => {
+            
+             res.render("post", {
+                post: result
     });
-}
+        }).catch((err)=> {console.log(err)})
+};
