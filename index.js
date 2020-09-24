@@ -15,7 +15,7 @@ const auth = require("./middleware/auth");
 
 const logoutController = require("./controllers/logout");
 const createPostController = require('./controllers/createPost');
-const homePageController = require('./controllers/homePage');
+const homePageController = require('./controllers/blogHome');
 const storePostController = require('./controllers/storePost');
 const getPostController = require('./controllers/getPost');
 const createUserController = require("./controllers/createUser");
@@ -28,7 +28,11 @@ const Post = require('./database/models/Post')
 
 const app = new express();
  
-mongoose.connect("mongodb+srv://moosemuffin:immortal@yemmyharry-vgumn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
+// mongoose.connect("mongodb+srv://moosemuffin:immortal@yemmyharry-vgumn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
+//     .then(() => 'You are now connected to Mongo!')
+//     .catch(err => console.error('Something went wrong', err));
+
+mongoose.connect('mongodb://localhost:27017/node-blog', { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
     .then(() => 'You are now connected to Mongo!')
     .catch(err => console.error('Something went wrong', err));
  
@@ -59,7 +63,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
   
 app.use('/posts/store', storePost)
  
-app.get("/", homePageController);
+
+
+app.get('/', (req, res) => {
+    res.render("home")});
+
+app.get("/blog", homePageController);
 app.get("/post/:id", getPostController);
 app.get("/edit/:id", getEditPostController);
 app.put("/post/:id", putEditPostController);
@@ -72,7 +81,7 @@ app.post("/users/register", redirectIfAuthenticated, storeUserController);
 app.get("/auth/logout", redirectIfAuthenticated, logoutController);
 app.delete('/post/:id', async (req, res) => {
   await Post.findByIdAndDelete(req.params.id)
-  res.redirect('/')
+  res.redirect('/blog')
 })
 
 

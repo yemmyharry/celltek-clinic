@@ -39,7 +39,7 @@ module.exports = (req, res) => {
             image: `/posts/${image.name}`
         }}, (error, post) => {
             console.log(post)
-            res.redirect("/");
+            res.redirect("/blog");
         });
     })
 }

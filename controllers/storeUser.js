@@ -8,6 +8,6 @@ module.exports = (req, res) => {
             req.flash('registrationErrors', registrationErrors)
             return res.redirect('/auth/register')
         }
-        res.redirect('/')
+        res.redirect('/blog')
     })
 }

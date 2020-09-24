@@ -35,10 +35,11 @@
         </div>
          
         <a href="/edit/{{ post._id}}" class="btn btn-info diss">Edit</a>
-          
-         <form action="/post/{{ post._id }}?_method=DELETE" method="POST" class="d-inline">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
+          @if(auth)
+              <form action="/post/{{ post._id }}?_method=DELETE" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+          @endif
         <hr>
       @endeach
       <!-- Pager -->
