@@ -153,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo {
-  font-size: 28px;
+  font-size: 20px;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -175,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 0;
   }
   #header .logo {
-    font-size: 28px;
+    font-size: 18px;
   }
 }
 
@@ -470,7 +470,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero h2 {
   color: #2f2f2f;
   margin-bottom: 20px;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
 }
 
