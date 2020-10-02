@@ -1659,14 +1659,14 @@ section {
 --------------------------------------------------------------*/
 #footer {
   background: #eeeeee;
-  padding: 0 0 30px 0;
+  padding: 0 0 20px 0;
   color: #555555;
   font-size: 14px;
 }
 
 #footer .footer-top {
   background: #f6f6f6;
-  padding: 60px 0 30px 0;
+  padding: 30px 0 20px 0;
 }
 
 #footer .footer-top .footer-info {
