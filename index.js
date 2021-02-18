@@ -9,6 +9,7 @@ const connectMongo = require('connect-mongo');
 const connectFlash = require("connect-flash");
 const edge = require("edge.js");
 const methodOverride = require("method-override");
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated')
 const storePost = require('./middleware/storePost');
@@ -46,16 +47,8 @@ app.use(expressSession({
     })
 }));
 
-
-app.all(function (req, res, next) {
-  if (req.secure) {
-          // request was via https, so do no special handling
-          next();
-  } else {
-          // request was via http, so redirect to https
-          res.redirect('https://' + req.headers.host + req.url);
-  }
-});
+// app.use(redirectToHTTPS());
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 
 app.use(methodOverride("_method"))
 app.use(connectFlash());
@@ -100,4 +93,3 @@ app.delete('/post/:id', async (req, res) => {
 app.listen(process.env.PORT || 4000, () => {
   console.log("App listening on port " + process.env.PORT);
 });  
-
