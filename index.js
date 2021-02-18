@@ -47,7 +47,7 @@ app.use(expressSession({
 }));
 
 
-app.use (function (req, res, next) {
+app.all(function (req, res, next) {
   if (req.secure) {
           // request was via https, so do no special handling
           next();
