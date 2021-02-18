@@ -41,8 +41,6 @@ const mongoStore = connectMongo(expressSession);
  
 app.use(expressSession({
     secret: 'secret',
-    httpOnly: true,
-    secure: true,
     store: new mongoStore({
         mongooseConnection: mongoose.connection
     })
