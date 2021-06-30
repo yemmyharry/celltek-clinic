@@ -30,13 +30,14 @@ const Post = require('./database/models/Post')
 
 const app = new express();
  
-// mongoose.connect(process.env.DATABASE, { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
-//     .then(() => 'You are now connected to Mongo!')
-//     .catch(err => console.error('Something went wrong', err));
-
-mongoose.connect('mongodb://localhost:27017/node-blog', { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
     .then(() => 'You are now connected to Mongo!')
     .catch(err => console.error('Something went wrong', err));
+    
+
+// mongoose.connect('mongodb://localhost:27017/node-blog', { useNewUrlParser: true ,'useFindAndModify': false, 'useCreateIndex': true, useUnifiedTopology: true})
+//     .then(() => 'You are now connected to Mongo!')
+//     .catch(err => console.error('Something went wrong', err));
  
 const mongoStore = connectMongo(expressSession);
  
